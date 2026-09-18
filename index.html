@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F&Pro Collection</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#070707;
+    color:#fff;
+}
+
+/* HEADER */
+header{
+    padding:28px 6%;
+    background:linear-gradient(135deg,#070707,#260000);
+    border-bottom:1px solid #480000;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:800;
+}
+
+.logo span{
+    color:#e00000;
+}
+
+.tagline{
+    color:#999;
+    margin-top:7px;
+    font-size:14px;
+}
+
+.search{
+    width:100%;
+    margin-top:22px;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #450000;
+    background:#111;
+    color:#fff;
+    outline:none;
+}
+
+/* CATEGORIES */
+.categories{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding:15px 6%;
+    background:#0d0d0d;
+}
+
+.categories button{
+    border:1px solid #430000;
+    background:#151515;
+    color:#fff;
+    padding:10px 17px;
+    border-radius:22px;
+    white-space:nowrap;
+    cursor:pointer;
+}
+
+.categories button:hover{
+    background:#a00000;
+}
+
+/* MAIN */
+.container{
+    width:88%;
+    max-width:1200px;
+    margin:30px auto;
+}
+
+.heading{
+    margin-bottom:22px;
+}
+
+.heading h2{
+    font-size:25px;
+}
+
+.heading p{
+    color:#888;
+    margin-top:6px;
+}
+
+/* CARDS */
+.apps{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(165px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:17px;
+    padding:18px;
+    text-align:center;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#b00000;
+    box-shadow:0 8px 25px #000;
+}
+
+.card img{
+    width:85px;
+    height:85px;
+    object-fit:cover;
+    border-radius:20px;
+    margin-bottom:12px;
+}
+
+.card h3{
+    font-size:17px;
+}
+
+.card p{
+    color:#888;
+    font-size:13px;
+    margin-top:6px;
+}
+
+/* DETAILS */
+#details{
+    display:none;
+}
+
+.back{
+    color:#ff3333;
+    cursor:pointer;
+    display:inline-block;
+    margin-bottom:20px;
+}
+
+.detail-box{
+    max-width:600px;
+    margin:auto;
+    padding:32px;
+    text-align:center;
+    background:#111;
+    border:1px solid #4a0000;
+    border-radius:20px;
+}
+
+.detail-box img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:28px;
+    margin-bottom:15px;
+}
+
+.detail-box h1{
+    margin-bottom:15px;
+}
+
+.info{
+    color:#aaa;
+    margin:9px;
+}
+
+.download{
+    display:block;
+    margin-top:25px;
+    padding:16px;
+    border-radius:10px;
+    background:#b00000;
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.download:hover{
+    background:#e00000;
+}
+
+/* FOOTER */
+footer{
+    margin-top:70px;
+    padding:25px;
+    text-align:center;
+    color:#666;
+    border-top:1px solid #222;
+}
+
+footer strong{
+    color:#b00000;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        F&<span>Pro</span> Collection
+    </div>
+
+    <div class="tagline">
+        Everything You Need, All in One Place.
+    </div>
+
+    <input
+        class="search"
+        id="search"
+        placeholder="Search apps, games, tools..."
+        onkeyup="searchApps()"
+    >
+
+</header>
+
+
+<nav class="categories">
+
+    <button onclick="showCategory('all')">
+        🏠 All
+    </button>
+
+    <button onclick="showCategory('editing')">
+        🎨 Editing
+    </button>
+
+    <button onclick="showCategory('games')">
+        🎮 Games
+    </button>
+
+    <button onclick="showCategory('movies')">
+        🎬 Entertainment
+    </button>
+
+    <button onclick="showCategory('ai')">
+        🤖 AI
+    </button>
+
+    <button onclick="showCategory('utility')">
+        🛠 Tools
+    </button>
+
+</nav>
+
+
+<main class="container">
+
+<section id="home">
+
+    <div class="heading">
+        <h2>🔥 Featured Apps</h2>
+        <p>Discover apps, games and useful tools.</p>
+    </div>
+
+    <div class="apps" id="appList"></div>
+
+</section>
+
+
+<section id="details">
+
+    <span class="back" onclick="goHome()">
+        ← Back to Collection
+    </span>
+
+    <div class="detail-box">
+
+        <img id="detailIcon" src="" alt="App">
+
+        <h1 id="detailName"></h1>
+
+        <p class="info" id="detailVersion"></p>
+
+        <p class="info" id="detailType"></p>
+
+        <p class="info" id="detailCategory"></p>
+
+        <p class="info" id="detailDescription"></p>
+
+        <a
+            id="downloadButton"
+            class="download"
+            href="#"
+            target="_blank"
+            rel="noopener"
+        >
+            DOWNLOAD
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+    © 2026 <strong>F&Pro Collection</strong>
+    — Everything You Need, All in One Place.
+</footer>
+
+
+<script>
+
+/* =========================================
+   APP DATABASE
+   ========================================= */
+
+const apps = [
+
+    {
+        name:"CapCut",
+        version:"Latest Version",
+        type:"Official",
+        category:"editing",
+        description:"Video editing application.",
+        icon:"https://via.placeholder.com/150",
+        download:"https://www.capcut.com/tools/video-editor-download"
+    },
+
+    {
+        name:"Example Game",
+        version:"Latest Version",
+        type:"Official",
+        category:"games",
+        description:"Add your game information here.",
+        icon:"https://via.placeholder.com/150",
+        download:"https://example.com"
+    },
+
+    {
+        name:"Movie App",
+        version:"Latest Version",
+        type:"Official",
+        category:"movies",
+        description:"Entertainment application.",
+        icon:"https://via.placeholder.com/150",
+        download:"https://example.com"
+    },
+
+    {
+        name:"AI App",
+        version:"Latest Version",
+        type:"Official",
+        category:"ai",
+        description:"AI tools and services.",
+        icon:"https://via.placeholder.com/150",
+        download:"https://example.com"
+    }
+
+];
+
+
+/* DISPLAY APPS */
+
+function displayApps(list){
+
+    const appList =
+        document.getElementById("appList");
+
+    appList.innerHTML="";
+
+    list.forEach(app=>{
+
+        const card =
+            document.createElement("div");
+
+        card.className="card";
+
+        card.innerHTML=`
+            <img src="${app.icon}"
+                 alt="${app.name}">
+
+            <h3>${app.name}</h3>
+
+            <p>${app.category}</p>
+        `;
+
+        card.onclick=()=>{
+            openDetails(app);
+        };
+
+        appList.appendChild(card);
+
+    });
+}
+
+
+/* APP DETAILS */
+
+function openDetails(app){
+
+    document.getElementById("home")
+        .style.display="none";
+
+    document.getElementById("details")
+        .style.display="block";
+
+    document.getElementById("detailIcon")
+        .src=app.icon;
+
+    document.getElementById("detailName")
+        .textContent=app.name;
+
+    document.getElementById("detailVersion")
+        .textContent=
+        "Version: "+app.version;
+
+    document.getElementById("detailType")
+        .textContent=
+        "Type: "+app.type;
+
+    document.getElementById("detailCategory")
+        .textContent=
+        "Category: "+app.category;
+
+    document.getElementById("detailDescription")
+        .textContent=
+        app.description;
+
+    document.getElementById("downloadButton")
+        .href=app.download;
+
+    window.scrollTo(0,0);
+}
+
+
+/* BACK */
+
+function goHome(){
+
+    document.getElementById("details")
+        .style.display="none";
+
+    document.getElementById("home")
+        .style.display="block";
+}
+
+
+/* CATEGORY */
+
+function showCategory(category){
+
+    if(category==="all"){
+        displayApps(apps);
+        return;
+    }
+
+    const filtered=
+        apps.filter(
+            app=>app.category===category
+        );
+
+    displayApps(filtered);
+}
+
+
+/* SEARCH */
+
+function searchApps(){
+
+    const search=
+        document.getElementById("search")
+        .value
+        .toLowerCase();
+
+    const results=
+        apps.filter(app=>
+            app.name.toLowerCase()
+            .includes(search)
+            ||
+            app.category.toLowerCase()
+            .includes(search)
+        );
+
+    displayApps(results);
+}
+
+
+/* START WEBSITE */
+
+displayApps(apps);
+
+</script>
+
+</body>
+      </html>
